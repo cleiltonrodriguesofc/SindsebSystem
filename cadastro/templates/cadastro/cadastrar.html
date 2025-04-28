@@ -1,0 +1,155 @@
+{% extends 'website/layout.html' %}
+{% block title %} Cadastrar Sócio {% endblock title %}
+
+{% block body %}
+<div class="container-cadastrar">
+    <h2>Cadastrar Sócio</h2>
+    <form id="form-cadastrar" action="{% url 'cadastro:cadastrar_socio' %}" method="POST" class="needs-validation" novalidate>
+        {% csrf_token %}
+        
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label for="nome">Nome completo</label>
+                <input name="nome" type="text" class="form-control" id="nome" placeholder="Nome completo" required>
+                <div class="invalid-tooltip">Insira o nome completo.</div>
+            </div>
+            <div class="col-md-2 mb-3">
+                <label for="cargo">Cargo</label>
+                <input name="cargo" type="text" class="form-control" id="cargo" placeholder="Cargo" required>
+                <div class="invalid-tooltip">Insira o cargo.</div>
+            </div>
+            <div class="col-md-2 mb-3">
+                <label for="lotacao">Lotação</label>
+                <input name="lotacao" type="text" class="form-control" id="lotacao" placeholder="Lotação" required>
+                <div class="invalid-tooltip">Insira a lotação.</div>
+            </div>
+            <div class="col-md-2 mb-3">
+                <label for="lotacao">Secretaria</label>
+                <input name="secretaria" type="text" class="form-control" id="lotacao" placeholder="Secretaria" required>
+                <div class="invalid-tooltip">Insira a secretaria.</div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-2 mb-3">
+                <label for="matricula">Matrícula</label>
+                <input name="matricula" type="number" class="form-control" id="matricula" placeholder="Matrícula" required>
+                <div class="invalid-tooltip">Insira a matrícula.</div>
+            </div>
+            <div class="col-md-2 mb-3">
+                <label for="data_admissao">Data de Admissão</label>
+                <input name="data_admissao" type="date" class="form-control" id="data_admissao">
+                <div class="invalid-feedback">Insira a data de admissão.</div>
+            </div>
+            <div class="col-md-2 mb-3">
+                <label for="data_socio">Data de Associação</label>
+                <input name="data_socio" type="date" class="form-control" id="data_socio">
+                <div class="invalid-feedback">Insira a data de associação.</div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="rua">Rua/Av</label>
+                <input name="rua" type="text" class="form-control" id="rua" placeholder="Rua/Avenida" required>
+                <div class="invalid-feedback">Insira a rua/av.</div>
+            </div>
+            <div class="col-md-1 mb-3">
+                <label for="numero">N°</label>
+                <input name="numero" type="text" class="form-control" id="numero" placeholder="N°" required>
+                <div class="invalid-tooltip">Insira o n°.</div>
+            </div>
+            <div class="col-md-2 mb-3">
+                <label for="bairro">Bairro</label>
+                <input name="bairro" type="text" class="form-control" id="bairro" placeholder="Bairro" required>
+                <div class="invalid-feedback">Insira o bairro.</div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-3 mb-3">
+                <label for="uf">UF</label>
+                <select name="uf" class="form-control" id="uf" required>
+                  <option value="">Selecione UF</option>
+                  <option value="AC">Acre (AC)</option>
+                  <option value="AL">Alagoas (AL)</option>
+                  <option value="AP">Amapá (AP)</option>
+                  <option value="AM">Amazonas (AM)</option>
+                  <option value="BA">Bahia (BA)</option>
+                  <option value="CE">Ceará (CE)</option>
+                  <option value="DF">Distrito Federal (DF)</option>
+                  <option value="ES">Espírito Santo (ES)</option>
+                  <option value="GO">Goiás (GO)</option>
+                  <option value="MA">Maranhão (MA)</option>
+                  <option value="MT">Mato Grosso (MT)</option>
+                  <option value="MS">Mato Grosso do Sul (MS)</option>
+                  <option value="MG">Minas Gerais (MG)</option>
+                  <option value="PA">Pará (PA)</option>
+                  <option value="PB">Paraíba (PB)</option>
+                  <option value="PR">Paraná (PR)</option>
+                  <option value="PE">Pernambuco (PE)</option>
+                  <option value="PI">Piauí (PI)</option>
+                  <option value="RJ">Rio de Janeiro (RJ)</option>
+                  <option value="RN">Rio Grande do Norte (RN)</option>
+                  <option value="RS">Rio Grande do Sul (RS)</option>
+                  <option value="RO">Rondônia (RO)</option>
+                  <option value="RR">Roraima (RR)</option>
+                  <option value="SC">Santa Catarina (SC)</option>
+                  <option value="SP">São Paulo (SP)</option>
+                  <option value="SE">Sergipe (SE)</option>
+                  <option value="TO">Tocantins (TO)</option>
+                </select>
+                <div class="invalid-feedback">Insira o UF.</div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="cidade">Cidade</label>
+                <input name="cidade" type="text" class="form-control" id="cidade" placeholder="Cidade" required>
+                <div class="invalid-feedback">Insira a cidade.</div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <label for="cep">CEP</label>
+                <input name="cep" type="text" class="form-control" id="cep" pattern="\d{5}-\d{3}" maxlength="9" placeholder="XXXXX-XXX" required>
+                <div class="invalid-feedback">Insira o CEP.</div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-md-2 mb-3">
+                <label for="data_nasc">Data de Nascimento</label>
+                <input name="data_nasc" type="date" class="form-control" id="data_nasc">
+                <div class="invalid-feedback">Insira a data de nascimento.</div>
+            </div>
+            <div class="col-md-2 mb-3">
+                <label for="rg">RG</label>
+                <input name="rg" type="text" class="form-control" id="rg" placeholder="RG" required>
+                <div class="invalid-tooltip">Insira o RG.</div>
+            </div>
+            <div class="col-md-2 mb-3">
+                <label for="cpf">CPF</label>
+                <input name="cpf" type="text" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" class="form-control" id="cpf" placeholder="CPF" required>
+                <div class="invalid-tooltip">Insira o CPF.</div>
+            </div>
+            <div class="col-md-2 mb-3">
+                <label for="telefone">Telefone</label>
+                <input name="telefone" type="text" pattern="\d{2} \d{5}-\d{4}" maxlength="14" class="form-control" id="telefone" placeholder="Telefone" required>
+                <div class="invalid-tooltip">Insira o telefone.</div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="email">Email</label>
+                <input name="email" type="email" class="form-control" id="email" placeholder="Email" required>
+                <div class="invalid-tooltip">Insira o email.</div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            {% for i in "1234" %}
+            <div class="col-md-6 mb-3">
+                <label for="dependente{{ i }}">Dependente</label>
+                <input name="dependente{{ i }}" type="text" class="form-control" id="dependente{{ i }}" placeholder="Nome completo do dependente (opcional)">
+                <div class="invalid-tooltip">Insira o nome completo do dependente.</div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <button id="submit" class="btn btn-primary" type="submit" disabled>Cadastrar</button>
+    </form>
+</div>
+
+{% endblock %}
