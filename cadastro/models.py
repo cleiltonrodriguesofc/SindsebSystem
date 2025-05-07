@@ -3,7 +3,7 @@ from django.db import models
 # Principal model: Socio
 class Socio(models.Model):
     matricula = models.CharField(max_length=10, unique=True, null=True)
-    nome = models.CharField(max_length=255)
+    nome = models.CharField(max_length=255, blank=False)
     data_nasc = models.DateField(null=True, blank=True)
     cpf = models.CharField(max_length=14, unique=True, null=True)
     rg = models.CharField(max_length=20, unique=True, blank=True)

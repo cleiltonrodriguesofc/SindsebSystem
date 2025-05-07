@@ -1,50 +1,58 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from datetime import date
 from .models import Socio, SocioDependent, SocioEndereco, SocioTrabalho, Lotacao
+from django.contrib import messages
 
 
+def clean_str(value):
+    """Clean string by stripping, converting to uppercase, and removing extra spaces."""
+    return ' '.join(value.strip().upper().split()) if value else ''
 
 def cadastrar_socio(request):
+    # List of states processed before passing to the template
+    states = "AC,AL,AP,AM,BA,CE,DF,ES,GO,MA,MT,MS,MG,PA,PB,PR,PE,PI,RJ,RN,RS,RO,RR,SC,SP,SE,TO"
+    state_list = states.split(',')
+
     if request.method == 'POST':
-        nome = request.POST.get('nome', '').strip().upper()
-        nome = ' '.join(nome.split())
+        nome = clean_str(request.POST.get('nome'))
+        if not nome:
+            return render(request, 'cadastro/cadastrar.html', {
+                'error': 'Este campo é obrigatório',
+                'state_list': state_list
+            }
+        )
 
-        cargo = request.POST.get('cargo', '').strip().upper()
-        cargo = ' '.join(cargo.split())
-
-        lotacao_name = request.POST.get('lotacao', '').strip().upper()
-        lotacao_name = ' '.join(lotacao_name.split())
-
-        secretaria = request.POST.get('secretaria', '').strip().upper()
-        secretaria = ' '.join(secretaria.split())
+        cargo = clean_str(request.POST.get('cargo'))
+        lotacao_name = clean_str(request.POST.get('lotacao'))
+        secretaria = clean_str(request.POST.get('secretaria'))
 
         matricula = request.POST.get('matricula', '').strip()
         data_admissao = request.POST.get('data_admissao')
         data_socio = request.POST.get('data_socio')
-
-        rua = request.POST.get('rua', '').strip().upper()
-        rua = ' '.join(rua.split())
-
-        numero = request.POST.get('numero', '')  # Ensure it's a string
-        numero = numero.strip().upper() if numero else ""
-
-        bairro = request.POST.get('bairro', '').strip().upper()
-        bairro = ' '.join(bairro.split())
-
-        uf = request.POST.get('uf', '').strip().upper()
-        cidade = request.POST.get('cidade', '').strip().upper()
-        cidade = ' '.join(cidade.split())
-
-        cep = request.POST.get('cep', '').strip()
         data_nasc = request.POST.get('data_nasc')
+        if data_nasc:
+            born = date.fromisoformat(data_nasc)
+            today = date.today()
+            age = today.year - born.year - ((today.month, today.day) < (born.month, born.day)) 
+            if age < 18:
+                messages.error(request, "O sócio deve ter pelo menos 18 anos.")
+                return render(request, 'cadastro/cadastrar.html', {'form_data': request.POST})
+
+        rua = clean_str(request.POST.get('rua'))
+        numero = request.POST.get('numero', '').strip().upper() if request.POST.get('numero') else ''
+        bairro = clean_str(request.POST.get('bairro'))
+        cidade = clean_str(request.POST.get('cidade'))
+        uf = clean_str(request.POST.get('uf'))
+        cep = request.POST.get('cep', '').strip()
 
         rg = request.POST.get('rg', '').strip()
         cpf = request.POST.get('cpf', '').strip()
         telefone = request.POST.get('telefone', '').strip()
         email = request.POST.get('email', '').strip().lower()
 
-        # Create socio object in model
+        # Create and save Socio
         socio = Socio(
             matricula=matricula,
             nome=nome,
@@ -57,30 +65,25 @@ def cadastrar_socio(request):
         )
         socio.save()
 
-        
-
-        # Create job object and link to socio
-
-        lotacao = Lotacao(
+        # Get or create Lotacao
+        lotacao, _ = Lotacao.objects.get_or_create(
             socio=socio,
-            socio_lotacao=lotacao_name,  
-            secretaria=secretaria,
+            socio_lotacao=lotacao_name,
+            secretaria=secretaria
         )
-        lotacao.save()
-        
+
+        # Create SocioTrabalho
         trabalho = SocioTrabalho(
-            socio=socio,  # Linking it to socio
+            socio=socio,
             cargo=cargo,
             data_admissao=data_admissao,
             lotacao=lotacao
         )
         trabalho.save()
 
-        
-
-        # Create address object and link to socio
+        # Create SocioEndereco
         endereco = SocioEndereco(
-            socio=socio,  # Linking it to socio
+            socio=socio,
             rua=rua,
             numero=numero,
             bairro=bairro,
@@ -90,18 +93,16 @@ def cadastrar_socio(request):
         )
         endereco.save()
 
-        # Get dependents names dynamically
+        # Create SocioDependent entries (up to 4)
         for i in range(1, 5):
-            nome_dependente = request.POST.get(f'dependente{i}', '').strip().upper()
-            nome_dependente = ' '.join(nome_dependente.split())
-
-            if nome_dependente:  # Only create if there's a valid name
-                dependente = SocioDependent(
-                    socio=socio,  # Linking to socio
-                    nome=nome_dependente
-                )
+            nome_dependente = clean_str(request.POST.get(f'dependente{i}', ''))
+            if nome_dependente:
+                dependente = SocioDependent(socio=socio, nome=nome_dependente)
                 dependente.save()
 
-        return render(request, 'cadastro/cadastrar.html')
+        # Return to the same page with a success message
+        return render(request, 'cadastro/cadastrar.html', {'success': 'Sócio cadastrado com sucesso!', 'state_list': state_list})
+
     else:
-        return render(request, 'cadastro/cadastrar.html')
+        # Initial page load, pass the state list to the template
+        return render(request, 'cadastro/cadastrar.html', {'state_list': state_list})
