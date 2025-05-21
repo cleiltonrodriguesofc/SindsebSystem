@@ -1,0 +1,86 @@
+{% extends 'cadastro/layout.html' %}
+
+{% block title %}Dashboard - SINDSEB{% endblock %}
+
+{% block body %}
+<div class="container mt-4" style="padding-top: 10px;">
+    <div class="d-flex justify-content-between align-items-center py-4" style="background: linear-gradient(90deg, #004080, #0066cc); padding: 20px; border-radius: 15px; margin-bottom: 20px; color: #ffffff;">
+        <h2>Dashboard</h2>
+        <button class="btn btn-novo-socio" data-href="{% url 'cadastro:cadastrar_socio' %}" onclick="redirectToUrl(this)">
+            + Novo Sócio
+        </button>
+        <script>
+            function redirectToUrl(button) {
+                const url = button.getAttribute('data-href');
+                window.location.href = url;
+            }
+        </script>
+    </div>
+    
+    <!-- KPI Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card p-4 shadow-sm">
+                <h3>Total Sócios</h3>
+                <p class="display-5" style="color: #0066cc;">{{ total_socios }}</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card p-4 shadow-sm">
+                <h3>Ativos</h3>
+                <p class="display-5" style="color: #33cc33;">{{ ativos }}</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card p-4 shadow-sm">
+                <h3>Inativos</h3>
+                <p class="display-5" style="color: #ff6600;">{{ inativos }}</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card p-4 shadow-sm">
+                <h3>Documentos Vencendo</h3>
+                <p class="display-5" style="color: #cc0000;">{{ documentos_vencendo }}</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Recent Members -->
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card p-4 shadow-sm mb-4">
+                <h4>Novos Sócios</h4>
+                <ul class="list-group">
+                    {% for socio in recent_socios %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ socio.nome }} ({{ socio.data_socio|date:"d/m/Y" }})
+                        <a href="{% url 'cadastro:ver_socio' socio.id %}" class="btn btn-sm btn-primary">Ver</a>
+                    </li>
+                    {% empty %}
+                    <li class="list-group-item">Nenhum sócio registrado recentemente.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Alerts and Activities -->
+        <div class="col-md-4">
+            <div class="card p-4 shadow-sm mb-4">
+                <h4>Alertas</h4>
+                <ul>
+                    <li>{{ documentos_vencendo }} documentos vencem em breve</li>
+                    <li>2 verificações pendentes</li>
+                </ul>
+            </div>
+            <div class="card p-4 shadow-sm">
+                <h4>Atividades Recentes</h4>
+                <ul>
+                    <li>João Silva adicionado em 09/05/2025</li>
+                    <li>Empresa X contrato vence em 10 dias</li>
+                    <li>Ana Santos desativada</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

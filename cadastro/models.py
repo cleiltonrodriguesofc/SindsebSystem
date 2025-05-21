@@ -1,7 +1,14 @@
 from django.db import models
+from datetime import date
 
 # Principal model: Socio
 class Socio(models.Model):
+    STATUS_CHOICES = [
+        ('Ativo', 'Ativo'),
+        ('Inativo', 'Inativo'),
+        ('Suspenso', 'Suspenso'),
+    ]
+
     matricula = models.CharField(max_length=10, unique=True, null=True)
     nome = models.CharField(max_length=255, blank=False)
     data_nasc = models.DateField(null=True, blank=True)
@@ -10,9 +17,17 @@ class Socio(models.Model):
     telefone = models.CharField(max_length=20, null=True, blank=True)
     data_socio = models.DateField(null=True, blank=True)
     email = models.EmailField(unique=True, null=True, blank=True)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Ativo')
+    documento_vencimento = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return f'{self.nome} (Matrícula: {self.matricula})'
+
+    def is_document_expiring_soon(self):
+        """Check if a document is expiring within the next 30 days."""
+        if self.documento_vencimento:
+            return (self.documento_vencimento - date.today()).days <= 30
+        return False
 
 
 # Lotação / Local de trabalho
@@ -27,9 +42,8 @@ class Lotacao(models.Model):
 
 # Cargo e data de admissão do sócio
 class SocioTrabalho(models.Model):
-    data_admissao = models.CharField(max_length=255, null=True, blank=True)
+    data_admissao = models.DateField(null=True, blank=True)
     cargo = models.CharField(max_length=255, null=True, blank=True)
-
     lotacao = models.ForeignKey(Lotacao, on_delete=models.SET_NULL, null=True, blank=True, related_name='trabalhos')
     socio = models.ForeignKey(Socio, on_delete=models.CASCADE, related_name='trabalhos')
 

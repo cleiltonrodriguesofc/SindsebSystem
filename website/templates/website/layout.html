@@ -28,7 +28,10 @@
             </div>
             
             <div class="header-title">
-                <h4>SINDICATO DOS SERVIDORES PÚBLICOS DA REDE MUNICIPAL DE BURITICUPU/MA E REGIÃO</h4>
+                <div class="title-sindseb">
+                    <h4>SINDICATO DOS SERVIDORES PÚBLICOS DA REDE MUNICIPAL<br>DE BURITICUPU/MA E REGIÃO</h4>
+                </div>
+                
                 <ul class="ul-header">
                     <li><a href="{% url 'website:index' %}">Início</a></li>
                     <li><a href="">Quem Somos</a></li>
@@ -37,7 +40,11 @@
                     <li><a href="{% url 'cadastro:cadastrar_socio' %}">Filie-se</a></li>
                 </ul>
             </div>
-        </div>
+
+            <div class="header-login">
+                <a href="{% url 'cadastro:login'%}" class="btn-header-login" title="Entrar no Sistema">
+                <i class="fas fa-sign-in-alt"></i>Admin</a>
+            </div>
     </header>
 
     <main>
@@ -47,7 +54,13 @@
     </main>
 
     <footer>
-        <p>Desenvolvido por SINDSEB</p>
+        <div class="container">
+            <p>Desenvolvido por SINDSEB | © 2025</p>
+            <ul>
+                <li><a href="#"><i class="bi bi-facebook"></i></a></li>
+                <li><a href="#"><i class="bi bi-instagram"></i></a></li>
+                <li><a href="#"><i class="bi bi-whatsapp"></i></a></li>
+            </ul>
         </div>
     </footer>
     

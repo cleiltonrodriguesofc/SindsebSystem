@@ -1,73 +1,204 @@
-main {
-    padding-top: 90px;
-    position: relative;
-    z-index: 1;
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fb;
+    margin: 0;
+    padding: 0;
 }
-.container-cadastrar {
+
+/* Main Content */
+main {
+    top: 150px;
+    margin-top: 85px;
+    z-index: 1;
     padding: 2%;
     display: flex;
     flex-direction: column;
-    position: relative;
-    z-index: 1;
+    min-height: 100vh;
 }
+
+/* Content Centering */
 .content-main-page {
     place-content: center;
     text-align: center;
-    padding: 2%;
-}
-.news {
-    background-color: rgb(227, 103, 103);
-    place-content: center;
-    height: 800px;
+    margin-bottom: 40px;
 }
 
+/* News Section */
+.news {
+    background-color: #e36767;
+    place-content: center;
+    height: 800px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    color: #ffffff;
+    padding: 40px 20px;
+}
+
+/* Header Styles */
 .header-main-page {
     position: fixed;
     padding: 1%;
-    background-color: rgb(2, 2, 58);
+    background: linear-gradient(90deg, #002060, #004080);
     top: 0;
     width: 100%;
     height: 100px;
-    text-align: center;
+    place-content: center;
+    gap: 100px;
+    /* text-align: center; */
     align-items: center;
     display: flex;
     padding: 2%;
     padding-top: 3%;
     z-index: 1000;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border-bottom: 3px solid #920808;
 }
+
+
+/* Header Title */
 .header-title {
     text-align: center;
 }
+
 .header-title h4 {
-    padding-top: 12px;
+    /* background-color: #f1b40c; */
+    padding-top: 8px;
     padding-bottom: 0;
-    color: rgb(255, 255, 255);
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.5em;
+    /* letter-spacing: 1px; */
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
 }
+
+.header-login {
+    /* background-color: #08b2f5; */
+    align-content: right;
+}
+/* login button */
+.btn-header-login {
+    /* background: linear-gradient(90deg, #002060, #004080);   */
+    /* color: #fff; */
+    padding: 12px 28px;
+    /* border-radius: 28px; */
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: background 0.17s, color 0.17s, box-shadow 0.16s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 32px;
+    /* sombra mais escura, combinando */
+    box-shadow: 0 6px 18px rgba(0, 32, 96, 0.14); 
+    border: none;
+    outline: none;
+    width: 5%;
+    /* borda branca opcional para destacar, pode tirar se quiser */
+    /* border: 2px solid #fff;  */
+}
+.btn-header-login:hover {
+    /* background: #004080; */
+    color: #ffe600;
+    /* box-shadow: 0 0 14px #92080880; */
+}
+
+
+/* Logo Image */
 .image-sindseb {
     height: 80px;
     width: auto;
     padding-bottom: 5px;
-    place-content: center;
+    align-items: left;
+    /* place-content: center; */
+    transition: all 0.3s ease;
+    /* background-color: #33cc33; */
+    /* color: #33cc33; */
 }
+
+.image-sindseb:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 102, 204, 0.3);
+}
+
+/* Navbar Styles */
 .ul-header {
     list-style: none;
     display: flex;
     font-size: 21px;
     color: white;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 20px;
     padding: 0;
     margin: 10px 0;
     justify-content: center;
     padding-bottom: 8px;
-}
-.ul-header li {
-    padding: 5px;
-}
-.ul-header a {
-    color: rgb(255, 255, 255);
+    transition: all 0.3s ease;
 }
 
+.ul-header li {
+    padding: 5px;
+    transition: all 0.3s ease;
+}
+
+.ul-header a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.ul-header a:hover {
+    background-color: #33cc33;
+    color: #ffffff;
+    box-shadow: 0 5px 15px rgba(51, 204, 51, 0.4);
+    transform: translateY(-2px);
+}
+
+
+
+/* Footer */
+footer {
+    background: linear-gradient(90deg, #002060, #004080);
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+    padding: 20px 0;
+    position: relative;
+    bottom: 0;
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3);
+    border-top: 3px solid #920808;
+    /* border-top: 3px solid #33cc33; */
+}
+
+footer p {
+    margin: 0;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.footer-icons {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-icons li a:hover {
+    color: #33cc33;
+}
+
+/* Responsive Styles */
 @media screen and (max-width: 768px) {
     h4 {
         display: none;
@@ -76,6 +207,7 @@ main {
     .header-main-page {
         height: auto;
         padding: 1%;
+        gap: 0;
     }
 
     main {
@@ -89,14 +221,3 @@ main {
     }
 }
 
-
-
-footer {
-    background-color: rgb(2, 2, 58);
-    width: 100%;
-    /* height: 50px; */
-    text-align: center;
-    place-content: center;
-    color: white;
-    /* position: absolute; */
-}

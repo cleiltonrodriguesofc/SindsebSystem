@@ -1,0 +1,39 @@
+# Ambiente virtual
+venv/
+env/
+.venv/
+
+# Banco de dados local
+db.sqlite3
+*.sqlite3
+
+# Arquivos compilados do Python
+__pycache__/
+*.pyc
+*.pyo
+*$py.class
+
+# Arquivos temporários, logs, backups
+*.log
+*.bak
+*.tmp
+
+# IDEs e editores
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# MacOS e Windows
+.DS_Store
+Thumbs.db
+
+# Cache de migrations (mas mantém os arquivos de migração .py)
+**/migrations/__pycache__/
+
+# Node modules (caso use alguma integração JS moderna)
+node_modules/
+
+# Arquivos/dirs criados por collectstatic
+staticfiles/
+media/

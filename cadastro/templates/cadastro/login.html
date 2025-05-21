@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>SINDSEB | Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> -->
+    <link rel="stylesheet" href="{% static 'cadastro/login.css' %}">
+    <script src="{% static 'cadastro/login.js' %}"></script>
+
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-welcome-section">
+            <img src="{% static 'images/logo-sindseb.png' %}" alt="SINDSEB Logo" class="sindseb-logo">
+            <h1>Bem-vindo(a) ao SINDSEB!</h1>
+            <p>Acesso restrito ao sistema do Sindicato dos Servidores Públicos.</p>
+        </div>
+        <div class="login-form-section">
+            <form id="loginForm" method="post" autocomplete="off">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" name="password" placeholder="********" required>
+                </div>
+                <div class="form-options">
+                    <label>
+                        <input type="checkbox" name="remember"> Lembrar-me
+                    </label>
+                    <a href="#" class="forgot-link">Esqueceu a senha?</a>
+                </div>
+                <div class="form-buttons">
+                    <button type="submit" class="btn-login">Entrar</button>
+                    <a href="" class="btn-signup">Cadastrar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

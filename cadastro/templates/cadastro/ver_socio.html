@@ -1,0 +1,97 @@
+{% extends 'cadastro/layout.html' %}
+{% block title %}Detalhes do Sócio{% endblock title %}
+
+{% block body %}
+<div class="container mt-4" style="padding-top: 10px;">
+    <div class="row">
+        <!-- Card da Foto -->
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body text-center py-5" style="background: linear-gradient(145deg, #0066cc, #004080); color: #ffffff; border-radius: 15px;">
+                    <div class="profile-picture mb-3" style="height: 300px; border-radius: 50%; background-color: #ffffff; margin: 0 auto; display: flex; align-items: center; justify-content: center; color: #999;">
+                        <span style="font-size: 48px;">👤</span>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Card dos Dados -->
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body">
+                    <h4 class="card-title mb-2" style="border-bottom: 2px solid #0066cc; padding-bottom: 10px;">
+                        {{ socio.nome }}
+                        <small class="text-muted" style="font-size: 0.8em; margin-left: 15px;">Matrícula: {{ socio.matricula }}</small>
+                    </h4>
+
+                    
+                    <div class="row mb-3">
+                        <div class="col-sm-6"><strong>CPF:</strong> {{ socio.cpf }}</div>
+                        <div class="col-sm-6"><strong>RG:</strong> {{ socio.rg }}</div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-sm-6"><strong>Data Nasc.:</strong> {{ socio.data_nasc }}</div>
+                        <div class="col-sm-6"><strong>Telefone:</strong> {{ socio.telefone }}</div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-sm-6"><strong>Email:</strong> {{ socio.email }}</div>
+                        <div class="col-sm-6"><strong>Data Associação:</strong> {{ socio.data_socio }}</div>
+                    </div>
+                    
+                    {% if trabalho %}
+                    <div class="row mb-3">
+                        <div class="col-sm-6"><strong>Cargo:</strong> {{ trabalho.cargo }}</div>
+                        <div class="col-sm-6"><strong>Admissão:</strong> {{ trabalho.data_admissao }}</div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if lotacao %}
+                    <div class="row mb-3">
+                        <div class="col-sm-6"><strong>Local de Trabalho:</strong> {{ lotacao.socio_lotacao }}</div>
+                        <div class="col-sm-6"><strong>Secretaria:</strong> {{ lotacao.secretaria }}</div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if endereco %}
+                    <div class="row mb-6">
+                        <div class="col-sm-12">
+                            <strong>Endereço:</strong> {{ endereco.rua }}, {{ endereco.numero }} – {{ endereco.bairro }} - 
+                            {{ endereco.cidade }} / {{ endereco.uf }} – CEP {{ endereco.cep }}
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <a href="{% url 'cadastro:listar_socios' %}" class="btn btn-primary mt-4" style="background: linear-gradient(90deg, #33cc33, #009900); border: none; border-radius: 30px; padding: 10px 30px;">← Voltar para Lista</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.profile-picture {
+    background-image: url('/static/images/profile-placeholder.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.card {
+    border-radius: 15px;
+}
+.card-body {
+    padding: 30px;
+}
+.card-title {
+    color: #004080;
+    font-weight: bold;
+    border-bottom: 2px solid #0066cc;
+}
+.btn-primary:hover {
+    background: linear-gradient(90deg, #009900, #33cc33);
+    box-shadow: 0 5px 15px rgba(0,150,0,0.4);
+}
+</style>
+{% endblock %}
