@@ -1,0 +1,68 @@
+{% extends 'cadastro/layout.html' %}
+
+{% block body %}
+
+<div class="container mt-4" style="padding-top: 10px;">
+    <div class="d-flex justify-content-between align-items-center py-4" style="background: linear-gradient(90deg, #004080, #0066cc); padding: 20px; border-radius: 15px; margin-bottom: 20px; color: #ffffff;">
+        <h2 class="mb-0">Lista de Sócios</h2>
+        <button class="btn btn-novo-socio" data-href="{% url 'cadastro:cadastrar_socio' %}" onclick="redirectToUrl(this)">
+            + Novo Sócio
+        </button>
+
+        <script>
+            function redirectToUrl(button) {
+                const url = button.getAttribute('data-href');
+                window.location.href = url;
+            }
+        </script>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover align-middle text-center shadow-sm">
+            <thead>
+                <tr>
+                    <th>Matrícula</th>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Local de Trabalho</th>
+                    <th>Secretaria</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for socio in socios %}
+                <tr class="clickable-row" data-href="{% url 'cadastro:ver_socio' socio.id %}">
+                    <td>{{ socio.matricula }}</td>
+                    <td>{{ socio.nome }}</td>
+                    <td>{{ socio.cpf }}</td>
+                    <td>{{ socio.local_trabalho }}</td>
+                    <td>{{ socio.secretaria }}</td>
+                    <td>
+                        <a href="{% url 'cadastro:ver_socio' socio.id %}" class="btn btn-info action-btn"><i class="bi bi-eye"></i> Ver</a>
+                        <a href="{% url 'cadastro:editar_socio' socio.id %}" class="btn btn-warning action-btn"><i class="bi bi-pencil"></i> Editar</a>
+                        <a href="#" class="btn btn-danger action-btn" onclick="return confirm('Deseja realmente excluir este sócio?');"><i class="bi bi-trash"></i> Excluir</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6">Nenhum sócio encontrado.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const rows = document.querySelectorAll(".clickable-row");
+        rows.forEach(row => {
+            row.addEventListener("click", (event) => {
+                if (!event.target.closest("a")) {
+                    window.location.href = row.getAttribute("data-href");
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

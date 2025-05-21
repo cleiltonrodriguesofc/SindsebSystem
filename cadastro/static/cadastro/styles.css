@@ -1,0 +1,170 @@
+body {
+    background-color: #f9f9f9;
+}
+
+.sidebar {
+    width: 250px;
+    background: linear-gradient(180deg, #002060, #004080);
+    height: 100vh;
+    padding-top: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+/* Main Content */
+main {
+    top: 150px;
+    margin-top: 85px;
+    z-index: 1;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+
+.nav-link {
+    padding: 15px 20px;
+    border-radius: 10px;
+}
+.nav-link.active {
+    background-color: #004080;
+}
+.nav-link:hover {
+    background-color: #0056b3;
+}
+.card {
+    border-radius: 15px;
+}
+
+
+.btn-novo-socio {
+    background: linear-gradient(90deg, #33cc33, #009900);
+    color: #ffffff;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 150, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-novo-socio:hover {
+    background: linear-gradient(90deg, #009900, #33cc33);
+    box-shadow: 0 8px 20px rgba(0, 150, 0, 0.5);
+    transform: translateY(-2px);
+}
+
+.btn-novo-socio i {
+    font-size: 1.2em;
+}
+.nav-link {
+    padding: 15px 20px;
+    border-radius: 10px;
+    color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.nav-link.active {
+    background-color: #004080;
+    color: #ffffff;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.nav-link:hover {
+    background-color: #0056b3;
+    color: #ffffff;
+    border-radius: 10px;
+}
+
+/* LIST SOCIOS */
+.clickable-row {
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+.clickable-row:hover {
+    background-color: #f8f9fa;
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.btn-custom {
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-size: 16px;
+    background: linear-gradient(90deg, #33cc33, #009900);
+    color: #ffffff;
+    border: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 150, 0, 0.3);
+}
+
+.btn-custom:hover {
+    background: linear-gradient(90deg, #009900, #33cc33);
+    box-shadow: 0 8px 20px rgba(0, 150, 0, 0.5);
+    transform: translateY(-2px);
+}
+
+.table thead {
+    background-color: #004080;
+    color: #ffffff;
+    border-radius: 8px;
+}
+
+.table th {
+    font-weight: bold;
+    border: none;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.action-btn {
+    border-radius: 25px;
+    margin-right: 5px;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    border: none;
+    color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.btn-info:hover {
+    background-color: #138496;
+    color: #ffffff;
+    box-shadow: 0 5px 15px rgba(19, 132, 150, 0.4);
+}
+
+.btn-warning {
+    background-color: #f0ad4e;
+    border: none;
+    color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.btn-warning:hover {
+    background-color: #ec971f;
+    color: #ffffff;
+    box-shadow: 0 5px 15px rgba(236, 151, 31, 0.4);
+}
+
+.btn-danger {
+    background-color: #d9534f;
+    border: none;
+    color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.btn-danger:hover {
+    background-color: #c9302c;
+    color: #ffffff;
+    box-shadow: 0 5px 15px rgba(201, 48, 44, 0.4);
+}
